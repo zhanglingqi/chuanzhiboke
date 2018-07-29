@@ -2,15 +2,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 var session = require('express-session');
-
+var MySQLStore = require('express-mysql-session')(session);
+var options = {
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'zlq1234',
+    database: 'ithub'
+};
+var sessionStore = new MySQLStore(options);
 //引入
 const router = require('./router');
 
 //实例化app
 const app = express();
 //配置express-session包
+
 app.use(session({
+    key: 'session_cookie_name',
     secret: 'keyboard cat',
+    store: sessionStore,
     resave: false,
     saveUninitialized: true
 }));

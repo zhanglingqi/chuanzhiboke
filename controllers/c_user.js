@@ -47,3 +47,12 @@ exports.handleSignin = (req, res) => {
 		})
 	})
 }
+
+//处理用户退出请求
+exports.handleSignout = (req, res) => {
+	//用delete方法  将session，user移除
+	delete req.session.user;
+	
+	//跳转到登录页
+	res.redirect('/signin');
+ }
