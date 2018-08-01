@@ -34,6 +34,11 @@ router.get('/signin', user.showSignin)
 	// 渲染编辑页面
     .get('/topic/:topicId/edit', topic.showEdit)
      // 处理编辑的表单请求
-    .post('/topic/:topicId/edit', topic.handleEdit);
+    .post('/topic/:topicId/edit', topic.handleEdit)
+    // 渲染注册页面
+    .get('/signup', user.showSignup)
+    // 处理注册表单的请求
+    .post('/signup', user.handleSignup);
+    
 
 module.exports = router;

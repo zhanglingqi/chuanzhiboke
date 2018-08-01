@@ -13,6 +13,7 @@ function checkEmail(email, callback) {
         callback(null, result);
     });
 }
+exports.checkEmail = checkEmail;
 // 我们发现:
 // 要在c_user.js控制器中使用checkEmail里面数据库查询的结果
 // 要在c_user.js控制器中使用checkEmail里面异步操作的结果
@@ -21,5 +22,25 @@ function checkEmail(email, callback) {
 // 只能使用回调函数去实现
 // 在异步操作中 把结果传递给callback
 
+//验证昵称
+exports.checkNickname = (nickname,callback) => {
+	  const sqlstr = 'SELECT *FROM `users` WHERE `nickname`=?';
+	  connection.query(sqlstr,nickname,(err, results) => {
+	  	if(err) {
+	  		return callback(err);
+	  	}
+	  	callback(null,results);
+	  })
+}
 
-exports.checkEmail = checkEmail;
+//添加新的用户数据
+exports.insertUser = (body, callback) => {
+	const sqlstr = 'INSERT INTO `users` SET ?';
+	connection.query(sqlstr,body,(err,results) => {
+		if(err) {
+			return callback(err)
+		}
+		callback(null,results);
+	})
+}
+
